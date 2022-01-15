@@ -31,12 +31,14 @@ const AuthState = props => {
       setAuthToken(localStorage.token);
     }
 
-    dispatch({ type: USER_LOADED });
-    // try {
-    //   const res = await axios.get('/api/v1/users/login');
-    // } catch (err) {
-    //   dispatch({ type: AUTH_ERROR });
-    // }
+    try {
+      const res = await axios.get(
+        'https://immense-spire-06276.herokuapp.com/api/v1/users/me'
+      );
+      dispatch({ type: USER_LOADED, payload: res.data.data.data });
+    } catch (err) {
+      dispatch({ type: AUTH_ERROR });
+    }
   };
 
   // Register User
