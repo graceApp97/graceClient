@@ -11,6 +11,8 @@ import setAuthToken from './utils/setAuthToken';
 import Dashboard from './components/pages/Dashboard';
 import PrivateRoute from './components/routing/PrivateRoue';
 import Alert from './components/layout/Alerts';
+import companyDetailStart from './components/pages/companyDetailStart';
+
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
@@ -27,7 +29,11 @@ function App() {
                 <PrivateRoute exact path="/" component={Dashboard} />
                 <Route path="/login" component={Login} />
                 <Route path="/register" component={Register} />
-                <Route path="**" component={Dashboard} />
+                <PrivateRoute
+                  path="/companyDetailStart"
+                  component={companyDetailStart}
+                />
+                <PrivateRoute path="**" component={Dashboard} />
               </Switch>
             </div>
           </Router>
